@@ -1,0 +1,20 @@
+<order>
+    <orderItems>
+        <orderItem>
+            <orderId>1001</orderId>
+            <shippingAddress>
+                <zipCode>99999</zipCode>
+            </shippingAddress>
+            <orderItemQty>1</orderItemQty>
+            <amount>100</amount>
+        </orderItem>
+        <orderItem>
+            <orderId>1002</orderId>
+            <shippingAddress>
+                <zipCode>99993</zipCode>
+            </shippingAddress>
+            <orderItemQty>10</orderItemQty>
+            <amount>1000</amount>
+        </orderItem>
+    </orderItems>
+</order>
