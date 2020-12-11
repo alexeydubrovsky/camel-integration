@@ -17,7 +17,7 @@
 # Use Case #1: 
     Create route to read Order.xml file, split each row using xpath and aggregate the total amount and quantity. 
     The final total amount and quantity should be written to data/case/out folder. At the end you must write an unit
-    test case to validate the aggegation logic. 
+    test case to validate the aggregation logic. 
     
     Input           : Refer data/sample/order.xml
     Expected output : Refer data/sample/order-output.xml
