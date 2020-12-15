@@ -4,20 +4,25 @@
 
 # Prerequisite
 
-    Java 1.8, Maven 
-    IDE (Eclipse, IntelliJ or VSCode)    
+   - Java 1.8, Maven 
+   - IDE (Eclipse, IntelliJ or VSCode)    
     
 # Setup 
 
-1. Checkout code from https://github.com/writemevenkat/camel-integration.git and create a new branch called develop. 
-2. Import camel-integration app into your IDE and run the bootstrapped application. 
-    Run -> com.ntt.test.Application
-     
+1. Go to https://github.com/writemevenkat/camel-integration in github and fork this code to your personal GitHub account.
+  
+2. Checkout camel-integration project from your github account and import into your IDE. Application can be invoked locally
+   using com.ntt.test.Application class.
+   
+3. To implement use case #1 and #2, you can refer this documentation (https://access.redhat.com/documentation/en-us/red_hat_fuse/7.5/html/apache_camel_development_guide/index)
+  
+3. After completing the use case, upload your code and share your gitHub link.       
     
 # Use Case #1: 
-    Create route to read Order.xml file, split each row using xpath and aggregate the total amount and quantity. 
-    The final total amount and quantity should be written to data/case/out folder. At the end you must write an unit
-    test case to validate the aggregation logic. 
+
+  Create route to read Order.xml file, split each row using xpath and aggregate the total amount and quantity. The 
+  final total amount and quantity should be written to data/usecase1/out folder. At the end you must write an unit 
+  test case to validate the aggregation logic. 
     
     Input           : Refer data/sample/order.xml
     Expected output : Refer data/sample/order-output.xml
@@ -25,11 +30,13 @@
 Use com.ntt.test.route.UseCase1OrderAggregator class for implementation. 
 
 # Use Case #2:
-    Expose a REST API using Apache Camel (you can use any Came REST implementations i.e CXF/Servlet/Undertow) 
-    to accept the following XML.
+  Develop a REST API using Apache Camel to find the lowest airline fair price by integrating with multiple airline providers.
+  Also implement integration best practices like exception handling, redelivery, logging etc.   
+  
     
-    2.1: Develop an API to expose the below API. 
-     
+  2.1: Expose a REST API using Apache Camel (you can use any Camel REST implementations i.e CXF/Servlet/Undertow) 
+  to accept the following XML.
+    
     POST /camel-integration/flights/search
     Body :
     <booking>
@@ -38,23 +45,31 @@ Use com.ntt.test.route.UseCase1OrderAggregator class for implementation.
         <date>mm-dd-yyyy</date>
     </booking>    
     
-    2.2: Upon receiving the request, convert received XML to JSON request then multicast this message to 3 different airline
-         providers. The response response from the providers should be aggregated to find the lowest fair price. 
-         Note: You must mock the airline providers endpoints. 
-         
-         Sample Mock Response from airline provider will look like this 
+  2.2: Upon receiving the request XML, convert received message to JSON request then multicast (parallel) this message 
+       to 3 different airline providers. The response from the providers should be aggregated to find the lowest 
+       fair price. 
+       
+       Note: You must mock the airline providers endpoints using another direct route endpoint.
+                
+       Sample Mock Response from airline provider will look like this 
                 {
                     "from": "location",
                     "to": "location",
                     "date": "mm-dd-yyyy",
+                    "provider": "delta",
                     "amount": 500                
                 }
-    2.4: The final response XML with lowest fair should be sent back to the consumer. 
+                
+  2.4: The final response XML with the lowest fair should be sent back to the consumer. 
+       
+       Sample Expected Response: 
+       
         <booking>
-            <from>location</from>
-            <to>location</to>
-            <date>mm-dd-yyyy</date>
-            <amount></amount>
+            <from>DAL</from>
+            <to>ATL</to>
+            <date>12-15-2020</date>
+            <provider>delta</provider>
+            <amount>500</amount>
         </booking>
                 
 Use com.ntt.test.route.UseCase2FlightBooking class for implementation.    
