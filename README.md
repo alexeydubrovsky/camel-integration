@@ -25,7 +25,8 @@
 Use com.ntt.test.route.UseCase1OrderAggregator class for implementation. 
 
 # Use Case #2:
-    Expose a REST API using Apache Camel (you can use any camel rest implementations) to accept the following XML.
+    Expose a REST API using Apache Camel (you can use any Came REST implementations i.e CXF/Servlet/Undertow) 
+    to accept the following XML.
     
     2.1: Develop an API to expose the below API. 
      
@@ -37,19 +38,24 @@ Use com.ntt.test.route.UseCase1OrderAggregator class for implementation.
         <date>mm-dd-yyyy</date>
     </booking>    
     
-    2.2: Upon receiving the request, convert the request to JSON and send it to queue (use Seda queue for this use case)
-    
-    2.3: Create another route to read the booking json message from queue and multicast the message to 3 different airline providers
-         then aggregate the response to find the lowest fair price. You must mock the airline providers endpoints. 
+    2.2: Upon receiving the request, convert received XML to JSON request then multicast this message to 3 different airline
+         providers. The response response from the providers should be aggregated to find the lowest fair price. 
+         Note: You must mock the airline providers endpoints. 
          
-         Sample Response from Airline Provider will look like this 
+         Sample Mock Response from airline provider will look like this 
                 {
                     "from": "location",
                     "to": "location",
                     "date": "mm-dd-yyyy",
                     "amount": 500                
                 }
-    2.4: The final response with lowest fair should be printed in the console log. 
+    2.4: The final response XML with lowest fair should be sent back to the consumer. 
+        <booking>
+            <from>location</from>
+            <to>location</to>
+            <date>mm-dd-yyyy</date>
+            <amount></amount>
+        </booking>
                 
 Use com.ntt.test.route.UseCase2FlightBooking class for implementation.    
     
