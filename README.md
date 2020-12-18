@@ -47,8 +47,8 @@ Use com.ntt.test.route.UseCase1OrderAggregator class for implementation.
     </booking>    
     
   2.2: Upon receiving the request XML, convert received request to JSON and multicast copy of the message 
-       to 3 different airline providers parallel. The response from the providers should be aggregated to find the lowest 
-       fair price. 
+       to 3 different airline providers in parallel. The response from the providers should be aggregated to find 
+       the lowest fair price. 
        
        Note: You must mock the airline providers endpoints using another direct route endpoint.
                 
@@ -63,8 +63,7 @@ Use com.ntt.test.route.UseCase1OrderAggregator class for implementation.
                 
   2.4: The final response XML with the lowest fair should be sent back to the consumer. 
        
-       Sample Expected Response: 
-       
+       Sample Expected Response:        
         <booking>
             <from>DAL</from>
             <to>ATL</to>
