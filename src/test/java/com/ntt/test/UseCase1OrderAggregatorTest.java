@@ -78,6 +78,7 @@ public class UseCase1OrderAggregatorTest {
         Diff myDiff = DiffBuilder.compare(actualMessage)
                 .withTest(expectedMessage)
                 .checkForSimilar()
+                .ignoreWhitespace()
                 .build();
 
         assertFalse(myDiff.toString(), myDiff.hasDifferences());
